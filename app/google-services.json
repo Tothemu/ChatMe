@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "151499847760",
+    "project_id": "chatme-video",
+    "storage_bucket": "chatme-video.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151499847760:android:4a451605610c63a6ad7955",
+        "android_client_info": {
+          "package_name": "uk.tees.ac.uk.b1860256.chatme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151499847760-julvptdbib2rbss3527fc6liiduksgnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ3UlZ-PjO3IYpacCmrpbeC0vQ7CUJFYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151499847760-julvptdbib2rbss3527fc6liiduksgnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
