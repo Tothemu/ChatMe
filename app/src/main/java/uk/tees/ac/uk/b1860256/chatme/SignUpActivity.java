@@ -14,6 +14,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import uk.tees.ac.uk.b1860256.chatme.Models.Users;
 import uk.tees.ac.uk.b1860256.chatme.databinding.ActivitySignUpBinding;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -48,8 +49,13 @@ public class SignUpActivity extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
                                     if(task.isSuccessful())
                                     {
+                                        Users user = new Users(binding.txtusername.getText().toString(),binding.txtEmail.getText().toString(),binding.txtPassword.getText().toString());
+                                        String id = task.getResult().getUser().getUid();
+                                        database.getReference().child("Users").child(id).setValue(user);
+
                                         Toast.makeText(SignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
                                     }
                                     else
