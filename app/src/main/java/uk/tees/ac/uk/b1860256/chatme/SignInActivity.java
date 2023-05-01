@@ -17,10 +17,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+import uk.tees.ac.uk.b1860256.chatme.Models.Users;
 import uk.tees.ac.uk.b1860256.chatme.databinding.ActivitySignInBinding;
 
 public class SignInActivity extends AppCompatActivity {
@@ -47,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait\nValidation in Progress");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder (GoogleSignInOptions. DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.default_web_client_ids))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -94,6 +98,13 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
     }
     int RC_SIGN_IN = 65;
     private void signIn() {
@@ -119,5 +130,34 @@ public class SignInActivity extends AppCompatActivity {
                 Log.w("TAG", "Google sign in failed", e);
             }
         }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null); 	mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete (@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user' information
+                            Log.d("TAG", "signInWithCredential: success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            Users users = new Users();
+                            users.setUserId(user.getUid());
+                            users.setUserName (user.getDisplayName());
+                            users.setProfilePic (user.getPhotoUrl().toString());
+                            firebaseDatabase.getReference().child("Users").child(user.getUid()).setValue(users);
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent);
+
+                            Toast.makeText(SignInActivity.this, "Sign in with Google", Toast.LENGTH_SHORT).show();
+
+                        } else {
+
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInWithCredential: failure", task.getException());
+                        }
+                    }
+                });
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import uk.tees.ac.uk.b1860256.chatme.Adapter.FragmentsAdapter;
 import uk.tees.ac.uk.b1860256.chatme.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
+
+        binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager()));
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
 
     @Override
@@ -40,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.settings:
-                Toast.makeText(this, "Setting is clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Setting is clicked", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent2);
                 break;
 
             case R.id.groupChat:
-                Toast.makeText(this, "Group Chat is Started", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Group Chat is Started", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this,GroupChatActivity.class);
+                startActivity(intent1);
                 break;
 
             case R.id.logout:

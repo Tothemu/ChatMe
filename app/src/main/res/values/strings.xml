@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">ChatMe</string>
-    <string name="default_web_client_id">default_web_client_id</string>
+    <string name="default_web_client_ids" translatable="false">151499847760-julvptdbib2rbss3527fc6liiduksgnn.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderIds" translatable="false">151499847760</string>
+    <string name="google_api_keys" translatable="false">AIzaSyDZ3UlZ-PjO3IYpacCmrpbeC0vQ7CUJFYg</string>
+    <string name="google_app_ids" translatable="false">1:151499847760:android:4a451605610c63a6ad7955</string>
+    <string name="google_crash_reporting_api_keys" translatable="false">AIzaSyDZ3UlZ-PjO3IYpacCmrpbeC0vQ7CUJFYg</string>
+    <string name="google_storage_buckets" translatable="false">chatme-video.appspot.com</string>
+    <string name="project_ids" translatable="false">chatme-video</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
